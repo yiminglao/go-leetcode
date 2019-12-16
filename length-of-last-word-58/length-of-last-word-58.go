@@ -23,5 +23,4 @@ func lengthOfLastWord(s string) int {
 		}
 		return len(str2[i])
 	}
-	return 0
 }
