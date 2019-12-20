@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
 	a := []int{-3, -3, -1, 2}
@@ -8,33 +11,32 @@ func main() {
 	fmt.Println(sortedSquares(a))
 }
 
-func sortedSquares(A []int) []int {
+// func sortedSquares(A []int) []int {
 
-	index := len(A) - 1
+// 	for i, v := range A {
+// 		A[i] = v * v
+// 	}
 
-	for index >= 1 {
-		left := A[0] * A[0]
-		right := A[index] * A[index]
-		if left > right {
-			A[0] = A[index]
-			A[index] = left
+// 	for j := 1; j < len(A); j++ {
+// 		key := A[j]
+// 		i := j - 1
+// 		for i >= 0 && A[i] > key {
+// 			A[i+1] = A[i]
+// 			i--
+// 		}
+// 		A[i+1] = key
+// 	}
 
-		} else {
-			A[index] = right
-		}
-		index--
-	}
-	A[0] = A[0] * A[0]
-	return A
-}
+// 	return A
+// }
 
 // Runtime: 524 ms, faster than 21.29% of Go online submissions for Squares of a Sorted Array.
 // Memory Usage: 8.5 MB, less than 66.67% of Go online submissions for Squares of a Sorted Array.
 
-// func sortedSquares(A []int) []int {
-// 	for i, v := range A {
-// 		A[i] = v * v
-// 	}
-// 	sort.Ints(A)
-// 	return A
-// }
+func sortedSquares(A []int) []int {
+	for i, v := range A {
+		A[i] = v * v
+	}
+	sort.Ints(A)
+	return A
+}
