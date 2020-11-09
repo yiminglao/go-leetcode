@@ -32,6 +32,8 @@ func majorityElement(nums []int) int {
 	for _, v := range nums {
 		if count == 0 {
 			major = v
+			count++
+			continue
 		}
 		if major == v {
 			count++
