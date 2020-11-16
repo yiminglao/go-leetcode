@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	s := "asdsa"
+	s := "abc"
 	fmt.Println(longestPalindrome(s))
 }
 
@@ -31,28 +31,59 @@ func main() {
 // 	return y
 // }
 
+// func longestPalindrome(s string) string {
+// 	n := len(s)
+// 	ans := ""
+// 	dp := make([][]int, n)
+// 	for i := 0; i < n; i++ {
+// 		dp[i] = make([]int, n)
+// 		dp[i][i] = 1
+// 	}
+// 	for l := 1; l < n; l++ {
+// 		for i := 0; i+l < n; i++ {
+// 			if l == 1 {
+// 				if s[i] == s[i+l] {
+// 					dp[i][i+l] = 1
+// 				}
+// 			} else {
+// 				if s[i] == s[i+l] {
+// 					dp[i][i+l] = dp[i+1][i+l-1]
+// 				}
+// 			}
+// 			if dp[i][i+l] > 0 && l+1 > len(ans) {
+// 				ans = s[i : i+l+1]
+// 			}
+// 		}
+// 	}
+// 	return ans
+// }
 func longestPalindrome(s string) string {
+
+	if len(s) == 1 {
+		return s
+	}
+
 	n := len(s)
-	ans := ""
+	ans := s[:1]
 	dp := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, n)
+		dp[i][i] = 1
 	}
-	for l := 0; l < n; l++ {
-		for i := 0; i+l < n; i++ {
-			if l == 0 {
-				dp[i][i+l] = 1
-			} else if l == 1 {
-				if s[i] == s[i+l] {
-					dp[i][i+l] = 1
+
+	for i := 1; i < n; i++ {
+		for j := 0; j+i < n; j++ {
+			if i == 1 {
+				if s[j] == s[i+j] {
+					dp[j][i+j] = 1
 				}
 			} else {
-				if s[i] == s[i+l] {
-					dp[i][i+l] = dp[i+1][i+l-1]
+				if s[j] == s[i+j] {
+					dp[j][i+j] = dp[j+1][i+j-1]
 				}
 			}
-			if dp[i][i+l] > 0 && l+1 > len(ans) {
-				ans = s[i : i+l+1]
+			if dp[j][i+j] > 0 && len(ans) < i+1 {
+				ans = s[j : i+j+1]
 			}
 		}
 	}
