@@ -2,40 +2,37 @@ package main
 
 import "fmt"
 
-var result [][]int
+var ans [][]int
 
 func main() {
 	nums := []int{1, 2, 3}
 	permute(nums)
-	fmt.Println(result)
+	fmt.Println(ans)
 
 }
 
 func permute(nums []int) [][]int {
-	result := [][]int{}
-	pathNum := []int{}
+	ans := [][]int{}
+	path := []int{}
 	isUsed := make([]bool, len(nums))
-	backtracking(nums, pathNum, isUsed)
-	return result
-
+	backtracking(nums, path, isUsed)
+	return ans
 }
 
-func backtracking(nums, pathNum []int, isUsed []bool) {
-	if len(nums) == len(pathNum) {
+func backtracking(nums, path []int, isUsed []bool) {
+	if len(path) == len(nums) {
 		temp := make([]int, len(nums))
-		copy(temp, pathNum)
-		result = append(result, temp)
+		copy(temp, path)
+		ans = append(ans, temp)
 		return
 	}
-
 	for i := 0; i < len(nums); i++ {
 		if !isUsed[i] {
 			isUsed[i] = true
-			pathNum = append(pathNum, nums[i])
-			backtracking(nums, pathNum, isUsed)
-			pathNum = pathNum[:len(pathNum)-1]
+			path = append(path, nums[i])
+			backtracking(nums, path, isUsed)
+			path = path[:len(path)-1]
 			isUsed[i] = false
 		}
 	}
-
 }
